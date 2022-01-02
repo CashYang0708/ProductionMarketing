@@ -106,15 +106,13 @@ def getwords(request):
     except:
         return render(request,'result_no.html')
     
-def showremaining(request):
-    remaining = Remaining.objects.all()
-    context = {'remaining': remaining}
-    return render(request, 'customer.html', context)
 
 def showactivity(request):
     activity = Activity.objects.all()
-    context = {'activity': activity}
-    return render(request, 'activity.html', context)
+    a_context = {'activity': activity} 
+    remaining = Remaining.objects.all()
+    r_context = {'remaining': remaining}
+    return render(request, 'activity.html', locals())
 
 
 def index(request):
