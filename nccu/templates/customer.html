@@ -1,0 +1,23 @@
+{%extends 'base.html'%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Remaining Rate</title>
+</head>
+<body>
+<table border="1">
+     <tr>
+        <th width="100">季別</th>
+        <th width="100">留存率</th>
+    </tr>
+    {%for r in remaining%}
+    <tr>
+        <th width="100">{{ r.season }}</th>
+        <th width="100">{{ r.rr }}</th>
+    </tr>
+    {%endfor%}
+</table>
+</body>
+</html>
+{%endblock%}

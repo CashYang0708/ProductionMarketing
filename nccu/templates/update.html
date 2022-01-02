@@ -1,0 +1,54 @@
+{%extends 'base.html'%}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function p_update(){
+        window.confirm("產品庫存更新成功")
+    }
+    function  q_update(){
+        window.confirm("原物料庫存更新成功")
+    }
+</script>
+<p>產品存貨更新</p>
+<form method="post" action="">
+    {% csrf_token %}
+    <select name="product">
+        <option>巧克力麵包</option>
+        <option>紅豆麵包</option>
+        <option>卡士達麵包</option>
+        <option>香蒜乳酪麵包</option>
+        <option>海苔肉鬆麵包</option>
+    </select>
+    <input name="p_quantity" placeholder="數量"></input>
+    <input type="submit" value="更新" onclick=p_update()></input>
+</form>
+<p>原物料存貨更新</p>
+<form method="post" action="">
+    {% csrf_token %}
+    <select name="material">
+        <option>巧克力醬</option>
+        <option>紅豆</option>
+        <option>卡士達醬</option>
+        <option>大蒜</option>
+        <option>乳酪</option>
+        <option>海苔</option>
+        <option>肉鬆</option>
+        <option>麵包</option>
+        <option>巧克力麵包包裝袋</option>
+        <option>紅豆麵包包裝袋</option>
+        <option>卡士達麵包包裝袋</option>
+        <option>香蒜乳酪麵包包裝袋</option>
+        <option>海苔肉鬆麵包包裝袋</option>
+    </select>
+    <input name="m_quantity" placeholder="數量"></input>
+    <input type="submit" value="更新" onclick="q_update()"></input>
+</form>
+</body>
+</html>
+{%endblock%}

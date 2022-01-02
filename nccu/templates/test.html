@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+</head>
+<body>
+  <p id="stock"><br></p>
+  <h2>存貨管理</h2>
+<p>
+
+
+<script>
+  function p_update(){
+      window.confirm("產品庫存更新成功")
+  }
+  function  q_update(){
+      window.confirm("原物料庫存更新成功")
+  }
+</script>
+<p><strong>產品存貨更新</strong>（輸入數字更新產品庫存量）</p>
+<form method="post" action="">
+  {% csrf_token %}
+  <select name="product" style="width:150px;">
+      <option >巧克力麵包</option>
+      <option>紅豆麵包</option>
+      <option>卡士達麵包</option>
+      <option>香蒜乳酪麵包</option>
+      <option>海苔肉鬆麵包</option>
+  </select>
+  <input name="p_quantity" placeholder="數量"></input>
+  <input type="submit" value="更新" onclick=p_update()></input>
+</form>
+
+<br>
+
+<p><strong>原物料存貨更新</strong>（輸入數字更新原料庫存量）</p>
+<form method="post" action="">
+  {% csrf_token %}
+  <select name="material">
+      <option>巧克力醬</option>
+      <option>紅豆</option>
+      <option>卡士達醬</option>
+      <option>大蒜</option>
+      <option>乳酪</option>
+      <option>海苔</option>
+      <option>肉鬆</option>
+      <option>麵包</option>
+      <option>巧克力麵包包裝袋</option>
+      <option>紅豆麵包包裝袋</option>
+      <option>卡士達麵包包裝袋</option>
+      <option>香蒜乳酪麵包包裝袋</option>
+      <option>海苔肉鬆麵包包裝袋</option>
+  </select>
+  <input name="m_quantity" placeholder="數量"></input>
+  <input type="submit" value="更新" onclick="q_update()"></input>
+</form>
+
+<br>
+
+<strong>生產排程</strong>
+<form method='post' action="/test/">
+{% csrf_token %}
+<select name="p_name">
+    <option>巧克力麵包</option>
+    <option>香蒜乳酪麵包</option>
+    <option>紅豆麵包</option>
+    <option>卡士達麵包</option>
+    <option>海苔肉鬆麵包</option>
+</select>
+<input name="date" type="date"></input>
+<input name="quantity" placeholder="數量"></input>
+<input type="submit" value="提交"></input>
+</form>
+</body>
+<br><br>
+<h6 style="font-weight:bold;">產品總覽：</h6>
+<br>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">產品名稱</th>
+          <th scope="col">庫存數量</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for p in product %}  
+        <tr>
+          <td> </td>
+          <td>{{ p.p_name }}　　　</td>
+          <td>{{ p.p_quantity }}</td>
+        </tr>
+    {% endfor %}
+</div>
+</tbody>
+</table>
+<br><br>
+<h6 style="font-weight:bold;">原料總覽：</h6>
+<br>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">原料名稱</th>
+          <th scope="col">庫存數量</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for m in material %}  
+        <tr>
+          <td> </td>
+          <td>{{ m.m_name }}</td>
+          <td>{{ m.m_quantity }}</td>
+        </tr>
+    {% endfor %}
+</div>
+</tbody>
+</table>
+</body>
+</html>
+{% endblock  %}

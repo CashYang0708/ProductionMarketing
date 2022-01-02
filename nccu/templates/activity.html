@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<br>
+<head>
+    <meta charset="UTF-8">
+    <h2>活動績效</h2>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th width="100">日期</th>
+        <th width="100">活動名稱</th>
+        <th width="100">目標客群</th>
+        <th width="100">獲取率</th>
+        <th width="100">取得成本</th>
+    </tr>
+    {%for a in activity%}
+    <tr>
+        <th width="100">{{ a.date }}</th>
+        <th width="100">{{ a.name }}</th>
+        <th width="100">{{ a.ta }}</th>
+        <th width="100">{{ a.ar }}</th>
+        <th width="100">{{ a.ac }}</th>
+    </tr>
+    {%endfor%}
+</table>
+
+</body>
+<br>
+<br>
+<head>
+    <meta charset="UTF-8">
+    <h2>顧客留存率</h2>
+</head>
+<body>
+<table border="1">
+     <tr>
+        <th width="100">季別</th>
+        <th width="100">留存率</th>
+    </tr>
+    {%for r in remaining%}
+    <tr>
+        <th width="100">{{ r.season }}</th>
+        <th width="100">{{ r.rr }}</th>
+    </tr>
+    {%endfor%}
+</table>
+</body>
+</html>
+{%endblock%}

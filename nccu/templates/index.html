@@ -1,0 +1,191 @@
+{%extends 'base.html'%}
+
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% block content %}
+<br>
+    <div class="text-center">
+        <p class="h1">顧客查詢功能</p>
+    </div>
+
+<form method='POST'>
+    <div class="text-center">
+    {% csrf_token %}
+    顧客名稱：{{ customerFilter.form.title }}
+    顧客性別：{{ customerFilter.form.sex }}
+    顧客年齡：{{ customerFilter.form.age }}
+    顧客居住地：{{ customerFilter.form.address }}
+    <input type="submit" class="btn btn-primary" value="查詢" />
+    </div>
+</form>
+<br />
+
+
+<div class="container">
+    <div class="text-center">
+        <p class="h2">Customer List</p>
+    </div>
+    <div class="text-center">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class="col-2">名稱 </th>
+                    <th class="col-2">性別</th>
+                    <th class="col-1">年齡</th>
+                    <th class="col-3">居住地</th>
+                    <th class="col-3">電話</th>
+                </tr>
+            </thead>
+            <tbody>
+                 {% for customer in customerFilter.qs %}
+                <tr>
+                    <td>{{ customer.title }}</td>
+                    <td>{{ customer.sex }}</td>
+                    <td>{{ customer.age }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.phone }}</td>
+                </tr>
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <p>
+        {% for page_number in Doc_warehouse.paginator.page_range %}
+            {{ page_number }}
+        {% endfor %}
+        </p>
+    </div>
+</div>
+<head>
+    <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://cdn.highcharts.com.cn/highcharts/modules/exporting.js"></script>
+    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
+</head>
+<br>
+<div class="text-center">
+    <p class="h1">顧客分佈圖</p>
+</div>
+
+<body>
+
+     <div id="container1" style="min-width:400px;height:400px"></div>
+    <script>
+        var chart = Highcharts.chart('container1', {
+title: {
+    text: '性別與年齡層混合圖表'
+},
+xAxis: {
+    categories: ['18歲以下', ' 19~30歲', '31~40歲', '41~50歲', '51~65歲', '65歲以上']
+},
+plotOptions: {
+    series: {
+        stacking: 'normal'
+    }
+},
+labels: {
+    items: [{
+        html: '性別比例',
+        style: {
+            left: '95px',
+            top: '6px',
+            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+        }
+    }]
+},
+series: [{
+    type: 'column',
+    name: '男性',
+    data: [14,18 ,14 ,6 ,3 ,3]
+}, {
+    type: 'column',
+    name: '女性',
+    data: [10,11 ,8 ,5 ,5 ,3]
+},  {
+    type: 'spline',
+    name: '平均值',
+    data: [12,14.5 ,11 ,5.5 ,4 ,3],
+    marker: {
+        lineWidth: 2,
+        lineColor: Highcharts.getOptions().colors[3],
+        fillColor: 'white'
+    }
+}, {
+    type: 'pie',
+    name: '性別總數',
+    data: [{
+        name: '男性',
+        y: 58,
+        color: Highcharts.getOptions().colors[0] // Jane's color
+    }, {
+        name: '女性',
+        y: 42,
+        color: Highcharts.getOptions().colors[1] // John's color
+    }],
+    center: [100, 30],
+    size: 50,
+    showInLegend: false,
+    dataLabels: {
+        enabled: false
+    }
+}]
+});
+    </script>
+
+     <div id="container2" style="min-width:400px;height:400px"></div>
+    <script>
+        // Build the chart
+Highcharts.chart('container2', {
+    chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+    },
+    title: {
+            text: '顧客居住地比例'
+    },
+    tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+            pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                            enabled: false
+                    },
+                    showInLegend: true
+            }
+    },
+    series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                    name: '北部',
+                    y: 30,
+                    sliced: true,
+                    selected: true
+            }, {
+                    name: '中部',
+                    y: 36
+            }, {
+                    name: '南部',
+                    y: 21
+            }, {
+                    name: '東部',
+                    y: 10
+            }, {
+                    name: '外島',
+                    y: 3.
+            }]
+    }]
+});
+    </script>
+
+</body>
+{% endblock %}
