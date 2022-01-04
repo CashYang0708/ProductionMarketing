@@ -1,6 +1,6 @@
 from django.shortcuts import render
 # Create your views here.
-from datetime import datetime
+from datetime import datetime,timedelta
 from .models import Activity, Product,Manufacture_Order,Material, Remaining, Customer
 from .filters import CustomerFilter
 
@@ -24,7 +24,7 @@ def reg(request):
 
 
 def getwords(request):
-    try:
+    if request.method == 'POST':
         date=request.POST['date']
         date=datetime.strptime(date,'%Y-%m-%d')
         quantity=request.POST['quantity']
@@ -34,7 +34,7 @@ def getwords(request):
         prepare=select[0].preparationtime
         epq=select[0].epq
         if inventory<int(quantity):
-            productiondate = date - datetime.timedelta(days=prepare)
+            productiondate = date - timedelta(days=prepare)
         else:
             productiondate='不用生產'
         if p_name=='巧克力麵包':
@@ -42,12 +42,12 @@ def getwords(request):
             bread=Material.objects.filter(m_name='麵包')
             for mm in m:
                 if mm.m_quantity<int(quantity):
-                    orderdate=date-datetime.timedelta(days=prepare+mm.preparationtime)
+                    orderdate=date-timedelta(days=prepare+mm.preparationtime)
                 else:
                     orderdate='不用訂購'
             for b in bread:
                 if b.m_quantity<int(quantity):
-                    b_orderdate = date - datetime.timedelta(days=prepare + b.preparationtime)
+                    b_orderdate = date - timedelta(days=prepare + b.preparationtime)
                 else:
                     b_orderdate='不用訂購'
         elif p_name=='紅豆麵包':
@@ -55,12 +55,12 @@ def getwords(request):
             bread = Material.objects.filter(m_name='麵包')
             for mm in m:
                 if mm.m_quantity<int(quantity):
-                    orderdate=date-datetime.timedelta(days=prepare+mm.preparationtime)
+                    orderdate=date-timedelta(days=prepare+mm.preparationtime)
                 else:
                     orderdate='不用訂購'
             for b in bread:
                 if b.m_quantity<int(quantity):
-                    b_orderdate = date - datetime.timedelta(days=prepare + b.preparationtime)
+                    b_orderdate = date - timedelta(days=prepare + b.preparationtime)
                 else:
                     b_orderdate='不用訂購'
         elif p_name=='卡士達麵包':
@@ -68,12 +68,12 @@ def getwords(request):
             bread = Material.objects.filter(m_name='麵包')
             for mm in m:
                 if mm.m_quantity<int(quantity):
-                    orderdate=date-datetime.timedelta(days=prepare+mm.preparationtime)
+                    orderdate=date-timedelta(days=prepare+mm.preparationtime)
                 else:
                     orderdate='不用訂購'
             for b in bread:
                 if b.m_quantity<int(quantity):
-                    b_orderdate = date - datetime.timedelta(days=prepare + b.preparationtime)
+                    b_orderdate = date - timedelta(days=prepare + b.preparationtime)
                 else:
                     b_orderdate='不用訂購'
         elif p_name=='海苔肉鬆麵包':
@@ -81,12 +81,12 @@ def getwords(request):
             bread = Material.objects.filter(m_name='麵包')
             for mm in m:
                 if mm.m_quantity<int(quantity):
-                    orderdate=date-datetime.timedelta(days=prepare+mm.preparationtime)
+                    orderdate=date-timedelta(days=prepare+mm.preparationtime)
                 else:
                     orderdate='不用訂購'
             for b in bread:
                 if b.m_quantity<int(quantity):
-                    b_orderdate = date - datetime.timedelta(days=prepare + b.preparationtime)
+                    b_orderdate = date - timedelta(days=prepare + b.preparationtime)
                 else:
                     b_orderdate='不用訂購'
         elif p_name=='香蒜乳酪麵包':
@@ -94,16 +94,16 @@ def getwords(request):
             bread = Material.objects.filter(m_name='麵包')
             for mm in m:
                 if mm.m_quantity<int(quantity):
-                    orderdate=date-datetime.timedelta(days=prepare+mm.preparationtime)
+                    orderdate=date-timedelta(days=prepare+mm.preparationtime)
                 else:
                     orderdate='不用訂購'
             for b in bread:
                 if b.m_quantity<int(quantity):
-                    b_orderdate = date - datetime.timedelta(days=prepare + b.preparationtime)
+                    b_orderdate = date - timedelta(days=prepare + b.preparationtime)
                 else:
                     b_orderdate='不用訂購'
         return render(request,'result.html',locals())
-    except:
+    else:
         return render(request,'result_no.html')
     
 
