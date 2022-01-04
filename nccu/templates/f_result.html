@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Result</title>
+</head>
+<br>
+<body>
+
+    <h2>行銷績效</h2>
+
+<br>
+<div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">產品名稱</th>
+          <th scope="col">需求預測數量</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <td> </td>
+          <td>巧克力麵包</td>
+          <td>{{ forecastdemand1 }}</td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>香蒜乳酪麵包</td>
+            <td>{{ forecastdemand2 }}</td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>紅豆麵包</td>
+            <td>{{ forecastdemand3 }}</td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>卡士達麵包</td>
+            <td>{{ forecastdemand4 }}</td>
+          </tr>
+          <tr>
+            <td> </td>
+            <td>海苔肉鬆麵包</td>
+            <td>{{ forecastdemand5 }}</td>
+          </tr>
+</div>
+</tbody>
+</table>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Forecast</title>
+</head>
+<body>
+    <br>
+    <h2>需求預測</h2>
+    <br>
+    <p>- 選擇月份即可以去年度的資料預測今年產品需求</p>
+<form method="post" action="">
+    {% csrf_token %}
+    <select name="year">
+        <option>2022</option>
+    </select>
+    <select name="month">
+        <option>01</option>
+        <option>02</option>
+        <option>03</option>
+        <option>04</option>
+        <option>05</option>
+        <option>06</option>
+        <option>07</option>
+        <option>08</option>
+        <option>09</option>
+        <option>10</option>
+        <option>11</option>
+        <option>12</option>
+    </select>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>
+{%endblock%}

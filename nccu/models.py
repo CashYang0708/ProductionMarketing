@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+#庫存
 class Product(models.Model):
     p_name=models.CharField(max_length=20)
     p_quantity=models.IntegerField()
@@ -11,6 +12,7 @@ class Product(models.Model):
     def __str__(self):
         return str(self.p_name)
 
+#庫存
 class Material(models.Model):
     m_name=models.CharField(max_length=20)
     m_quantity=models.IntegerField()
@@ -83,3 +85,53 @@ class Activity(models.Model):
     
     def __str__(self):
         return str(self.name)
+
+#賣出去的
+class chocolate(models.Model):
+    count = models.IntegerField()
+    date = models.CharField(max_length=20, default='2021-01')
+    demand = models.IntegerField()
+
+    class Meta:
+        db_table = 'chocolate'
+    
+
+
+class cheese(models.Model):
+    count = models.IntegerField()
+    date = models.CharField(max_length=20, default='2021-01')
+    demand = models.IntegerField()
+
+    class Meta:
+        db_table = 'cheese'
+    
+
+
+
+class redbean(models.Model):
+    count = models.IntegerField()
+    date = models.CharField(max_length=20, default='2021-01')
+    demand = models.IntegerField()
+
+    class Meta:
+        db_table = 'redbean'
+
+
+class cream(models.Model):
+    count = models.IntegerField()
+    date = models.CharField(max_length=20, default='2021-01')
+    demand = models.IntegerField()
+
+    class Meta:
+        db_table = 'cream'
+    
+
+
+
+class meatfloss(models.Model):
+    count = models.IntegerField()
+    date = models.CharField(max_length=20, default='2021-01')
+    demand = models.IntegerField()
+
+    class Meta:
+        db_table = 'meatfloss'

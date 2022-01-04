@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from nccu.views import reg, getwords, showactivity, index, home
+from nccu.views import reg, getwords, showactivity, index, home, forecasting
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,5 @@ urlpatterns = [
     path('test/', getwords),
     path('activity/', showactivity),
     path('index/', index),
+    path('forecast/', forecasting),
 ]

@@ -1,7 +1,8 @@
+from django import forms
 from django.shortcuts import render
 # Create your views here.
 from datetime import datetime,timedelta
-from .models import Activity, Product,Manufacture_Order,Material, Remaining, Customer
+from .models import Activity, Product,Manufacture_Order,Material, Remaining, Customer, chocolate, cheese, redbean, cream, meatfloss
 from .filters import CustomerFilter
 
 def home(request):
@@ -131,4 +132,151 @@ def index(request):
  
     return render(request, "index.html", context)
 
+def forecasting(request):
+    if request.method == 'POST':
+        year = request.POST['year']
+        month = request.POST['month']
+        date = str(year) + "-" + str(month)
+        #巧克力麵包
+        select1 = chocolate.objects.filter(date=date)
+        count1 = select1[0].count
+        demand1 = select1[0].demand
+        if count1 == 1:
+            forecastdemand1 = None
+
+        if count1 == 2:
+            s1 = chocolate.objects.filter(count=count1 - 1)
+            d1 = s1[0].demand
+            forecastdemand1 = d1
+
+        if count1 == 3:
+            s1 = chocolate.objects.filter(count=count1 - 1)
+            d1 = s1[0].demand
+            s2 = chocolate.objects.filter(count=count1 - 2)
+            d2 = s2[0].demand
+            forecastdemand1 = 0.5 * d1 + 0.5 * d2
+
+        if count1 >= 4:
+            s1 = chocolate.objects.filter(count=count1 - 1)
+            d1 = s1[0].demand
+            s2 = chocolate.objects.filter(count=count1 - 2)
+            d2 = s2[0].demand
+            s3 = chocolate.objects.filter(count=count1 - 3)
+            d3 = s3[0].demand
+            forecastdemand1 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
+
+        #香蒜乳酪麵包
+        select2 = cheese.objects.filter(date=date)
+        count2 = select2[0].count
+        demand2 = select2[0].demand
+        if count2 == 1:
+            forecastdemand2 = None
+
+        if count2 == 2:
+            s1 = cheese.objects.filter(count=count2 - 1)
+            d1 = s1[0].demand
+            forecastdemand2 = d1
+
+        if count2 == 3:
+            s1 = cheese.objects.filter(count=count2 - 1)
+            d1 = s1[0].demand
+            s2 = cheese.objects.filter(count=count2 - 2)
+            d2 = s2[0].demand
+            forecastdemand2 = 0.5 * d1 + 0.5 * d2
+
+        if count2 >= 4:
+            s1 = cheese.objects.filter(count=count2 - 1)
+            d1 = s1[0].demand
+            s2 = cheese.objects.filter(count=count2 - 2)
+            d2 = s2[0].demand
+            s3 = cheese.objects.filter(count=count2 - 3)
+            d3 = s3[0].demand
+            forecastdemand2 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
+
+        #紅豆麵包
+        select3 = redbean.objects.filter(date=date)
+        count3 = select3[0].count
+        demand3 = select3[0].demand
+        if count3 == 1:
+            forecastdemand3 = None
+
+        if count3 == 2:
+            s1 = redbean.objects.filter(count=count3 - 1)
+            d1 = s1[0].demand
+            forecastdemand3 = d1
+
+        if count3 == 3:
+            s1 = redbean.objects.filter(count=count3 - 1)
+            d1 = s1[0].demand
+            s2 = redbean.objects.filter(count=count3 - 2)
+            d2 = s2[0].demand
+            forecastdemand3 = 0.5 * d1 + 0.5 * d2
+
+        if count3 >= 4:
+            s1 = redbean.objects.filter(count=count3 - 1)
+            d1 = s1[0].demand
+            s2 = redbean.objects.filter(count=count3 - 2)
+            d2 = s2[0].demand
+            s3 = redbean.objects.filter(count=count3 - 3)
+            d3 = s3[0].demand
+            forecastdemand3 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
+
+        #卡士達麵包
+        select4 = cream.objects.filter(date=date)
+        count4 = select4[0].count
+        demand4 = select4[0].demand
+        if count4 == 1:
+            forecastdemand4 = None
+
+        if count4 == 2:
+            s1 = cream.objects.filter(count=count4 - 1)
+            d1 = s1[0].demand
+            forecastdemand4 = d1
+
+        if count4 == 3:
+            s1 = cream.objects.filter(count=count4 - 1)
+            d1 = s1[0].demand
+            s2 = cream.objects.filter(count=count4 - 2)
+            d2 = s2[0].demand
+            forecastdemand4 = 0.5 * d1 + 0.5 * d2
+
+        if count4 >= 4:
+            s1 = cream.objects.filter(count=count4 - 1)
+            d1 = s1[0].demand
+            s2 = cream.objects.filter(count=count4 - 2)
+            d2 = s2[0].demand
+            s3 = cream.objects.filter(count=count4 - 3)
+            d3 = s3[0].demand
+            forecastdemand4 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
+
+        #海苔肉鬆麵包
+        select5 = meatfloss.objects.filter(date=date)
+        count5 = select5[0].count
+        demand5 = select5[0].demand
+        if count5 == 1:
+            forecastdemand5 = None
+
+        if count5 == 2:
+            s1 = meatfloss.objects.filter(count=count5 - 1)
+            d1 = s1[0].demand
+            forecastdemand5 = d1
+
+        if count5 == 3:
+            s1 = meatfloss.objects.filter(count=count5 - 1)
+            d1 = s1[0].demand
+            s2 = meatfloss.objects.filter(count=count5 - 2)
+            d2 = s2[0].demand
+            forecastdemand5 = 0.5 * d1 + 0.5 * d2
+
+        if count5 >= 4:
+            s1 = meatfloss.objects.filter(count=count5 - 1)
+            d1 = s1[0].demand
+            s2 = meatfloss.objects.filter(count=count5 - 2)
+            d2 = s2[0].demand
+            s3 = meatfloss.objects.filter(count=count5 - 3)
+            d3 = s3[0].demand
+            forecastdemand5 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
+        return render(request, 'f_result.html', locals())
+    else:
+        return render(request, 'forecast.html', locals())
 # Create your views here.
