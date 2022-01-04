@@ -104,7 +104,9 @@ def getwords(request):
                     b_orderdate='不用訂購'
         return render(request,'result.html',locals())
     else:
-        return render(request,'result_no.html')
+        product=Product.objects.all()
+        material=Material.objects.all()
+        return render(request,'result_no.html', locals())
     
 
 def showactivity(request):
