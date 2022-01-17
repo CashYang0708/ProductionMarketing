@@ -25,11 +25,12 @@
         <tr>
             <td> </td>
           <td>巧克力麵包</td>
-          <td>{{ forecastdemand1 }}
-              <form action="chocolate_result.html">
+          <td>{{ forecastdemand1 }}</td>
+            <td>
+              <form action="{% url 'test' %}">
                 <button type="submit">Continue</button>
               </form>
-          </td>
+            </td>
         </tr>
         <tr>
             <td> </td>
@@ -54,6 +55,7 @@
 </div>
 </tbody>
 </table>
+{{list}}
 </body>
 </html>
 {% endblock %}

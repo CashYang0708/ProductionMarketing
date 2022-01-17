@@ -19,9 +19,9 @@ from nccu.views import reg, getwords, showactivity, index, home, forecasting
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('stock/', reg ),
-    path('test/', getwords),
+    path('', home, name = 'home'),
+    path('stock/', reg , name = 'stock'),
+    path('test/', getwords, name = 'test'),
     path('activity/', showactivity),
     path('index/', index),
     path('forecast/', forecasting),
