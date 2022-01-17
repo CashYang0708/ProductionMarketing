@@ -164,7 +164,7 @@ def forecasting(request):
             s3 = chocolate.objects.filter(count=count1 - 3)
             d3 = s3[0].demand
             forecastdemand1 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
-        chocolate(request,date,forecastdemand1)
+        cho(request,date,forecastdemand1)
         #香蒜乳酪麵包
         select2 = cheese.objects.filter(date=date)
         count2 = select2[0].count
@@ -220,7 +220,7 @@ def forecasting(request):
             s3 = redbean.objects.filter(count=count3 - 3)
             d3 = s3[0].demand
             forecastdemand3 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
-        redbean(request,date,forecastdemand3)
+        rn(request,date,forecastdemand3)
         #卡士達麵包
         select4 = cream.objects.filter(date=date)
         count4 = select4[0].count
@@ -248,7 +248,7 @@ def forecasting(request):
             s3 = cream.objects.filter(count=count4 - 3)
             d3 = s3[0].demand
             forecastdemand4 = 0.5 * d1 + 0.3 * d2 + 0.2 * d3
-        cream(request,date,forecastdemand4)
+        cm(request,date,forecastdemand4)
         #海苔肉鬆麵包
         select5 = meatfloss.objects.filter(date=date)
         count5 = select5[0].count
@@ -281,7 +281,7 @@ def forecasting(request):
     else:
         return render(request, 'forecast.html', locals())
 # Create your views here.
-def chocolate(request,date,demand):
+def cho(request,date,demand):
     date=datetime.strptime(date+'-01','%Y-%m-%d')
     select = Product.objects.filter(p_name='巧克力麵包')
     inventory = select[0].p_quantity
@@ -302,7 +302,7 @@ def chocolate(request,date,demand):
         else:
             b_orderdate = '不用訂購'
     print(productiondate,orderdate,b_orderdate)
-def redbean(request,date,demand):
+def rn(request,date,demand):
     date=datetime.strptime(date+'-01','%Y-%m-%d')
     select = Product.objects.filter(p_name='紅豆麵包')
     inventory = select[0].p_quantity
@@ -323,7 +323,7 @@ def redbean(request,date,demand):
         else:
             b_orderdate = '不用訂購'
     print(productiondate,orderdate,b_orderdate)
-def cream(request,date,demand):
+def cm(request,date,demand):
     date=datetime.strptime(date+'-01','%Y-%m-%d')
     select = Product.objects.filter(p_name='卡士達麵包')
     inventory = select[0].p_quantity
