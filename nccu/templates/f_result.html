@@ -9,7 +9,7 @@
 <br>
 <body>
 
-    <h2>行銷績效</h2>
+    <h2>需求預測</h2>
 
 <br>
 <div class="table-responsive">
@@ -26,11 +26,6 @@
             <td> </td>
           <td>巧克力麵包</td>
           <td>{{ forecastdemand1 }}</td>
-            <td>
-              <form action="{% url 'test' %}">
-                <button type="submit">Continue</button>
-              </form>
-            </td>
         </tr>
         <tr>
             <td> </td>
@@ -53,9 +48,12 @@
             <td>{{ forecastdemand5 }}</td>
           </tr>
 </div>
+
 </tbody>
 </table>
-{{list}}
+<form action="{% url 'test' %}">
+  <button type="submit">Continue</button>
+</form>
 </body>
 </html>
 {% endblock %}
